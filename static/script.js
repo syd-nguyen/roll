@@ -1,22 +1,20 @@
 const newBoardForm = document.getElementById("newBoardForm");
-const eventName = document.getElementById("eventName");
+const eventNameField = document.getElementById("eventNameField");
 
 newBoardForm.addEventListener("submit", async (e) => {
 
     e.preventDefault();
-    const text = eventName.value.trim();
-    if (!text) return;
+    const eventName = eventNameField.value.trim();
+    if (!eventName) return;
         
     try {
         const endpoint = "http://127.0.0.1:5000/api/send-event-to-mongo";
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ text })
+            body: JSON.stringify({ eventName })
         });
 
-        const toprint = await res.json();
-        console.log(toprint);
     } catch (err) {
         console.log("error");
     }
