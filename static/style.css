@@ -1,0 +1,15 @@
+:root {
+    --buttonbg: navy;
+    --textcolor: white;
+    --font: Montserrat;
+}
+
+button {
+    font-family: var(--font);
+    background-color: var(--buttonbg);
+    color: var(--textcolor);
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    margin: 10px;
+}
