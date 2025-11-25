@@ -8,7 +8,7 @@ newBoardForm.addEventListener("submit", async (e) => {
     if (!text) return;
         
     try {
-        const endpoint = "http://127.0.0.1:5000/api/echo";
+        const endpoint = "http://127.0.0.1:5000/api/send-event-to-mongo";
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
