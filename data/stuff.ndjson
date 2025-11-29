@@ -56,3 +56,9 @@
 {"eventName": "northern lights", "eventDesc": "we go see stars :)", "receivedAt": "2025-11-29T10:40:51.709105+00:00", "eventHash": "bdad5dbf500b2a2f326b433b0cc455ffa662d663e0101438b98bf957421379ed", "eventId": "bdad5d"}
 {"eventName": "northern lights", "eventDesc": "we go see stars :)", "receivedAt": "2025-11-29T10:49:26.608750+00:00", "eventHash": "bdad5dbf500b2a2f326b433b0cc455ffa662d663e0101438b98bf957421379ed", "eventId": "bdad5d"}
 {"eventName": "northern lights", "eventDesc": "we go see stars :)", "receivedAt": "2025-11-29T10:49:56.727203+00:00", "eventHash": "bdad5dbf500b2a2f326b433b0cc455ffa662d663e0101438b98bf957421379ed", "eventId": "bdad5d"}
+null
+{"eventName": "retreat", "eventDesc": "nature and friends", "receivedAt": "2025-11-29T11:24:44.835087+00:00", "eventHash": "5bac5161290ae1ab8c69877c5e1c3ed8cbed90ec319603f6e2087572cd368db5", "eventId": "5bac51", "cars": []}
+{"eventName": "retreat", "eventDesc": "nature and friends", "receivedAt": "2025-11-29T11:26:39.851686+00:00", "eventHash": "5bac5161290ae1ab8c69877c5e1c3ed8cbed90ec319603f6e2087572cd368db5", "eventId": "5bac51", "cars": []}
+{"eventName": "retreat", "eventDesc": "nature and friends", "receivedAt": "2025-11-29T11:28:20.376868+00:00", "eventHash": "5bac5161290ae1ab8c69877c5e1c3ed8cbed90ec319603f6e2087572cd368db5", "eventId": "5bac51", "cars": []}
+{"eventName": "retreat", "eventDesc": "nature and friends", "receivedAt": "2025-11-29T11:31:59.808681+00:00", "eventHash": "5bac5161290ae1ab8c69877c5e1c3ed8cbed90ec319603f6e2087572cd368db5", "eventId": "5bac51", "cars": []}
+{"eventName": "dinner", "eventDesc": "food", "receivedAt": "2025-11-29T11:51:23.012104+00:00", "eventHash": "da9b8a3edc1eee8fefa4a028cabf6d336fb679c102b8f3a63d48834d581bded1", "eventId": "da9b8a", "cars": []}

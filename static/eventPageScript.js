@@ -1,32 +1,48 @@
 const rootUrl = "http://127.0.0.1:5000";
 
-const newBoardForm = document.getElementById("newBoardForm");
-const eventNameField = document.getElementById("eventNameField");
-const eventDescField = document.getElementById("eventDescField");
+// ** add car elements to html **
 
-newBoardForm.addEventListener("submit", async (e) => {
+// get cars
+fetch(rootUrl + "/api/testing").then((response) => response.json())
+
+cars = response.cars
+for (i=0; i<cars.length; i++) {
+    let newCar = document.createElement("p")
+    newCar.innerText = cars[i]
+    document.body.appendChild(newCar)
+}
+
+const addCarForm = document.getElementById("addCarForm");
+const driverNameField = document.getElementById("driverNameField");
+const numberSeatsField = document.getElementById("numberSeatsField");
+
+addCarForm.addEventListener("submit", async (e) => {
 
     e.preventDefault();
-    const eventName = eventNameField.value.trim();
-    const eventDesc = eventDescField.value.trim();
-    if (!eventName) return;
-    if (!eventDesc) return;
+    const driverName = driverNameField.value.trim();
+    const numberSeats = numberSeatsField.value;
+    if (!driverName) return;
+    if (!numberSeats) return;
         
     try {
-        const endpoint = rootUrl + "/api/send-event-to-mongo";
+
+        var currentEventId = window.location.href
+        currentEventId = currentEventId.substring(currentEventId.length-6, currentEventId.length)
+
+        const endpoint = rootUrl + "/api/send-car-to-mongo/" + currentEventId;
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc})
+            body: JSON.stringify({"driverName": driverName, "numberSeats": numberSeats})
         });
-
-        eventId = sha256(eventName + eventDesc).substring(0,6)
-
-        window.location.href = rootUrl + "/" + eventId;
         
+        location.reload()
+
+
     } catch (err) {
-        console.log("error");
+        console.log("error" + err);
     }
+
 
 });
 

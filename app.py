@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for
 from storage import append_json_line
 from pymongo import MongoClient
 from pydantic import ValidationError
-from models import EventSubmission, EventSubmissionRecord
+from models import EventSubmission, EventSubmissionRecord, CarSubmission
 from datetime import datetime, timezone
 from hashlib import sha256
 import os
@@ -47,18 +47,46 @@ def sendEventToMongo():
         eventId = hashedStr[:6] # id is first six characters of hash
     )
 
-    append_json_line(eventRecord.dict())
-    #events.insert_one(eventRecord.dict()) UNCOMMENT THIS LATERRRRR THIS IS VERY IMPORTANT
+    eventRecordDict = eventRecord.dict()
+    eventRecordDict.update({'cars': []})
+
+    # add to Mongo database along with empty array of cars
+    append_json_line(eventRecordDict)
+    events.insert_one(eventRecordDict)
     
     return jsonify({"status": "ok"}), 200
 
-@app.route('/<eventId>')
+@app.get('/<eventId>')
 def getEventPage(eventId):
     # get event from Mongo using its id
     event = events.find_one({'eventId' : eventId})
     # render it
     if (event is not None):
         return render_template('event.html', eventName = event['eventName'])
+    
+@app.post('/api/send-car-to-mongo/<eventId>')
+def sendCarToMongo(eventId):
+
+    formData = request.get_json(silent=True) # silent=True suppresses warnings and returns None if there is an error
+    if formData is None:
+        return
+    
+    # validate form data and throw error if applicable
+    try:
+        validatedFormData = CarSubmission(**formData)
+    except ValidationError as ve:
+        print("Error:", ve.errors())
+        return jsonify({"error": "validation error", "detail": ve.errors()}), 422
+
+    # get corresponding event from Mongo using eventId and insert car into that event
+    events.update_one( { "eventId": eventId }, { "$push": { "cars": validatedFormData.dict() } })
+
+    return jsonify({"status": "ok"}), 200
+
+@app.route('/api/testing')
+def testing():
+    return ["car 1", "car 2"]
+
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()

@@ -3,11 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="../static/style.css" />
-        <title>An Event</title>
+        <script src="../static/eventPageScript.js" defer></script>
+        <title>{{ eventName }} rideboard</title>
     </head>
     <body>
         
-        <h1>The name of the event is {{ eventName }}</h1>
+        <h1>{{ eventName }} rideboard</h1>
+        <form id="addCarForm">
+            <input id="driverNameField" type="text" placeholder="driver name" autocomplete="on" required />
+            <input id="numberSeatsField" type="number" autocomplete="on" required />
+            <button type="submit">Add Car</button>
+      </form>
 
     </body>
 
