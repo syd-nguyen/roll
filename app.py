@@ -83,13 +83,16 @@ def sendCarToMongo(eventId):
 
     return jsonify({"status": "ok"}), 200
 
-@app.route('/api/testing')
-def testing():
-    return ["car 1", "car 2"]
-
+@app.get('/api/get-cars-for-event/<eventId>')
+def testing(eventId):
+    event = getEvent(eventId)
+    return event['cars']
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()
+
+def getEvent(eventId):
+    return events.find_one({'eventId' : eventId})
 
 if __name__ == "__main__":
     app.run()

@@ -1,16 +1,18 @@
 const rootUrl = "http://127.0.0.1:5000";
+var currEventId = window.location.href
+currEventId = currEventId.substring(currEventId.length-6, currEventId.length)
 
 // ** add car elements to html **
 
 // get cars
-fetch(rootUrl + "/api/testing").then((response) => response.json())
-
-cars = response.cars
-for (i=0; i<cars.length; i++) {
-    let newCar = document.createElement("p")
-    newCar.innerText = cars[i]
-    document.body.appendChild(newCar)
-}
+fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => response.json()).then((cars) => {
+    // add cars to document body
+    for (i=0; i<cars.length; i++) {
+        let newCar = document.createElement("p")
+        newCar.innerText = cars[i]['driverName'] + " " + cars[i]['numberSeats']
+        document.body.appendChild(newCar)
+    }
+});
 
 const addCarForm = document.getElementById("addCarForm");
 const driverNameField = document.getElementById("driverNameField");
@@ -25,9 +27,6 @@ addCarForm.addEventListener("submit", async (e) => {
     if (!numberSeats) return;
         
     try {
-
-        var currentEventId = window.location.href
-        currentEventId = currentEventId.substring(currentEventId.length-6, currentEventId.length)
 
         const endpoint = rootUrl + "/api/send-car-to-mongo/" + currentEventId;
         const res = await fetch(endpoint, {
