@@ -13,11 +13,23 @@ const carsDropdownField = document.getElementById("carsDropdownField");
 // get cars
 fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => response.json()).then((cars) => {
     for (i=0; i<cars.length; i++) {
-        // add cars to document body
+
+        let thisCar = cars[i]
+
+        // add cars to document body, also add their riders
         let newCar = document.createElement("p")
-        newCar.innerText = cars[i]['driverName'] + ": " + cars[i]['takenSeats'] + " / " + cars[i]['numberSeats']
+        newCar.innerText = thisCar['driverName'] + ": " + thisCar['takenSeats'] + " / " + thisCar['numberSeats']
         document.body.appendChild(newCar)
-        // add cars to dropdown list for riders IF there is room in their car
+        for (j=0; j<thisCar['riders'].length; j++) {
+            let thisRider = thisCar['riders'][j]
+            let newRider = document.createElement("p")
+            newRider.innerText = thisRider.riderName
+            document.body.appendChild(newRider)
+        }
+
+
+
+        // add cars to dropdown list for riders
         let newOption = document.createElement("option")
         newOption.text = newOption.value = cars[i]['driverName']
         carsDropdownField.add(newOption, 0);
