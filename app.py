@@ -106,20 +106,21 @@ def sendRiderToMongo(eventId, driverName):
         print("Error:", ve.errors())
         return jsonify({"error": "validation error", "detail": ve.errors()}), 422
     
-# validated form data is nothing for some reason
-    testingDict = {"riderName" : "syd"}
-    carsToUpdate = getEvent(eventId)['cars'] # this is an array of documents (which is also embedded within an event document)
-    print(carsToUpdate)
-    for i in range(len(carsToUpdate)):
-        car = carsToUpdate[i] # each car is a document with an array of rider documents
-        print("\t", car)
-        if car['driverName'] == driverName:
-            ridersToUpdate = car['riders'] # this is an array of documents
-            ridersToUpdate.append(testingDict)
-            print(validatedFormData)
-            car.update({'riders' : ridersToUpdate})
-            print("updated car", car)
+    # this is kind of a goofy way to update the embedded documents but it works so yea :)
 
+    carsToUpdate = getEvent(eventId)['cars'] # this is an array of documents (which is also embedded within an event document)
+
+    for car in carsToUpdate: # each car is a document with an array of rider documents
+        if car['driverName'] == driverName:
+
+            ridersToUpdate = car['riders'] # this is an array of documents
+            ridersToUpdate.append(validatedFormData.dict())
+            car.update({'riders' : ridersToUpdate})
+
+            takenSeatsToUpdate = car['takenSeats']
+            takenSeatsToUpdate = takenSeatsToUpdate + 1
+            car.update({'takenSeats': takenSeatsToUpdate})
+    
     events.update_one( { "eventId": eventId }, { "$set" : { "cars": carsToUpdate }})
 
     return jsonify({"status": "ok"}), 200
