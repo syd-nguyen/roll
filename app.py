@@ -63,6 +63,7 @@ def getEventPage(eventId):
     # render it
     if (event is not None):
         return render_template('event.html', eventName = event['eventName'])
+    return render_template('eventDNE.html', eventId = eventId)
     
 @app.post('/api/send-car-to-mongo/<eventId>')
 def sendCarToMongo(eventId):
@@ -86,7 +87,9 @@ def sendCarToMongo(eventId):
 @app.get('/api/get-cars-for-event/<eventId>')
 def testing(eventId):
     event = getEvent(eventId)
-    return event['cars']
+    if (event is not None):
+        return event['cars']
+    else: return jsonify({'error': 'no event found'})
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()

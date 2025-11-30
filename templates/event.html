@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -7,15 +7,24 @@
         <title>{{ eventName }} rideboard</title>
     </head>
     <body>
-        
         <h1>{{ eventName }} rideboard</h1>
         <form id="addCarForm">
             <input id="driverNameField" type="text" placeholder="driver name" autocomplete="on" required />
             <input id="numberSeatsField" type="number" autocomplete="on" required />
             <button type="submit">Add Car</button>
-      </form>
+        </form>
 
+        <form id="addRiderForm">
+            <input id="xxx" type="text" placeholder="rider name" autocomplete="on" required />
+            <select id="cars" name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+            <button type="submit">Add Rider</button>
+        </form>
+
+        <div>Syd 2 / 2</div>
     </body>
-
-
 </html>

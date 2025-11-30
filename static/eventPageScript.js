@@ -28,7 +28,7 @@ addCarForm.addEventListener("submit", async (e) => {
         
     try {
 
-        const endpoint = rootUrl + "/api/send-car-to-mongo/" + currentEventId;
+        const endpoint = rootUrl + "/api/send-car-to-mongo/" + currEventId;
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
