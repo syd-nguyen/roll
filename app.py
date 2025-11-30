@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for
 from storage import append_json_line
 from pymongo import MongoClient
 from pydantic import ValidationError
-from models import EventSubmission, EventSubmissionRecord, CarSubmission
+from models import EventSubmission, EventSubmissionRecord, CarSubmission, RiderSubmission
 from datetime import datetime, timezone
 from hashlib import sha256
 import os
@@ -68,7 +68,7 @@ def getEventPage(eventId):
 @app.post('/api/send-car-to-mongo/<eventId>')
 def sendCarToMongo(eventId):
 
-    formData = request.get_json(silent=True) # silent=True suppresses warnings and returns None if there is an error
+    formData = request.get_json(silent=True)
     if formData is None:
         return
     
@@ -94,14 +94,36 @@ def getCarsForEvent(eventId):
 
 @app.post('/api/send-rider-to-mongo/<eventId>/<driverName>') # this finds the car via the driver name but it could be changed to be by an id
 def sendRiderToMongo(eventId, driverName):
-    event = getEvent(eventId)
-    return
-    #events.update_one( { "eventId" : eventId }, { "$push" : { "cars."}})
 
-
-
-
+    formData = request.get_json(silent=True)
+    if formData is None:
+        return
     
+    # validate form data and throw error if applicable
+    try:
+        validatedFormData = RiderSubmission(**formData)
+    except ValidationError as ve:
+        print("Error:", ve.errors())
+        return jsonify({"error": "validation error", "detail": ve.errors()}), 422
+    
+# validated form data is nothing for some reason
+    testingDict = {"riderName" : "syd"}
+    carsToUpdate = getEvent(eventId)['cars'] # this is an array of documents (which is also embedded within an event document)
+    print(carsToUpdate)
+    for i in range(len(carsToUpdate)):
+        car = carsToUpdate[i] # each car is a document with an array of rider documents
+        print("\t", car)
+        if car['driverName'] == driverName:
+            ridersToUpdate = car['riders'] # this is an array of documents
+            ridersToUpdate.append(testingDict)
+            print(validatedFormData)
+            car.update({'riders' : ridersToUpdate})
+            print("updated car", car)
+
+    events.update_one( { "eventId": eventId }, { "$set" : { "cars": carsToUpdate }})
+
+    return jsonify({"status": "ok"}), 200
+
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()
