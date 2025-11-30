@@ -18,4 +18,4 @@ class CarSubmission(BaseModel):
     takenSeats: int
 
 class RiderSubmission(BaseModel):
-    riderName = constr(min_length=3, max_length=30)
+    riderName: constr(min_length=3, max_length=30)
