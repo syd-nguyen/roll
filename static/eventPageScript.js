@@ -17,15 +17,18 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
         let thisCar = cars[i]
 
         // add cars to document body, also add their riders
+        let newDiv = document.createElement("div")
+        newDiv.setAttribute("style", "border: 3px solid gray; padding: 5px; width: 20%;")
         let newCar = document.createElement("p")
         newCar.innerText = thisCar['driverName'] + ": " + thisCar['takenSeats'] + " / " + thisCar['numberSeats']
-        document.body.appendChild(newCar)
+        newDiv.appendChild(newCar)
         for (j=0; j<thisCar['riders'].length; j++) {
             let thisRider = thisCar['riders'][j]
             let newRider = document.createElement("p")
             newRider.innerText = thisRider.riderName
-            document.body.appendChild(newRider)
+            newDiv.appendChild(newRider)
         }
+        document.body.appendChild(newDiv);
 
         // add cars to dropdown list for riders IF they have open seats
         if (thisCar.takenSeats < thisCar.numberSeats) {
