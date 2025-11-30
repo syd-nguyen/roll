@@ -27,12 +27,12 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
             document.body.appendChild(newRider)
         }
 
-
-
-        // add cars to dropdown list for riders
-        let newOption = document.createElement("option")
-        newOption.text = newOption.value = cars[i]['driverName']
-        carsDropdownField.add(newOption, 0);
+        // add cars to dropdown list for riders IF they have open seats
+        if (thisCar.takenSeats < thisCar.numberSeats) {
+            let newOption = document.createElement("option")
+            newOption.text = newOption.value = cars[i]['driverName']
+            carsDropdownField.add(newOption, 0);
+        }
     }
 });
 
