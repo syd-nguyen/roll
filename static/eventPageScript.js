@@ -2,21 +2,27 @@ const rootUrl = "http://127.0.0.1:5000";
 var currEventId = window.location.href
 currEventId = currEventId.substring(currEventId.length-6, currEventId.length)
 
+const addCarForm = document.getElementById("addCarForm");
+const driverNameField = document.getElementById("driverNameField");
+const numberSeatsField = document.getElementById("numberSeatsField");
+const addRiderForm = document.getElementById("addRiderForm");
+const carsDropdownField = document.getElementById("carsDropdownField");
+
 // ** add car elements to html **
 
 // get cars
 fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => response.json()).then((cars) => {
-    // add cars to document body
     for (i=0; i<cars.length; i++) {
+        // add cars to document body
         let newCar = document.createElement("p")
         newCar.innerText = cars[i]['driverName'] + " " + cars[i]['numberSeats']
         document.body.appendChild(newCar)
+        // add cars to dropdown list for riders IF there is room in their car
+        let newOption = document.createElement("option")
+        newOption.text = newOption.value = cars[i]['driverName']
+        carsDropdownField.add(newOption, 0);
     }
 });
-
-const addCarForm = document.getElementById("addCarForm");
-const driverNameField = document.getElementById("driverNameField");
-const numberSeatsField = document.getElementById("numberSeatsField");
 
 addCarForm.addEventListener("submit", async (e) => {
 
@@ -32,7 +38,7 @@ addCarForm.addEventListener("submit", async (e) => {
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"driverName": driverName, "numberSeats": numberSeats})
+            body: JSON.stringify({"driverName": driverName, "numberSeats": numberSeats, "takenSeats": 0})
         });
         
         location.reload()
