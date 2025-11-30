@@ -15,3 +15,4 @@ class EventSubmissionRecord(EventSubmission):
 class CarSubmission(BaseModel):
     driverName: str = Field(..., min_length=3, max_length=30)
     numberSeats: conint(le=15)
+    takenSeats: int

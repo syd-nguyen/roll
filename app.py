@@ -78,18 +78,30 @@ def sendCarToMongo(eventId):
     except ValidationError as ve:
         print("Error:", ve.errors())
         return jsonify({"error": "validation error", "detail": ve.errors()}), 422
+    
+    carDict = validatedFormData.dict()
+    carDict.update({'riders': []})
 
     # get corresponding event from Mongo using eventId and insert car into that event
-    events.update_one( { "eventId": eventId }, { "$push": { "cars": validatedFormData.dict() } })
+    events.update_one( { "eventId": eventId }, { "$push": { "cars": carDict } })
 
     return jsonify({"status": "ok"}), 200
 
 @app.get('/api/get-cars-for-event/<eventId>')
-def testing(eventId):
+def getCarsForEvent(eventId):
     event = getEvent(eventId)
-    if (event is not None):
-        return event['cars']
-    else: return jsonify({'error': 'no event found'})
+    return event['cars']
+
+@app.post('/api/send-rider-to-mongo/<eventId>/<driverName>') # this finds the car via the driver name but it could be changed to be by an id
+def sendRiderToMongo(eventId, driverName):
+    event = getEvent(eventId)
+    return
+    #events.update_one( { "eventId" : eventId }, { "$push" : { "cars."}})
+
+
+
+
+    
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()

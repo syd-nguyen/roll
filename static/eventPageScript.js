@@ -15,7 +15,7 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
     for (i=0; i<cars.length; i++) {
         // add cars to document body
         let newCar = document.createElement("p")
-        newCar.innerText = cars[i]['driverName'] + " " + cars[i]['numberSeats']
+        newCar.innerText = cars[i]['driverName'] + ": " + cars[i]['takenSeats'] + " / " + cars[i]['numberSeats']
         document.body.appendChild(newCar)
         // add cars to dropdown list for riders IF there is room in their car
         let newOption = document.createElement("option")
@@ -43,13 +43,37 @@ addCarForm.addEventListener("submit", async (e) => {
         
         location.reload()
 
+    } catch (err) {
+        console.log("error" + err);
+    }
+
+});
+
+addRiderForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+    const riderName = riderNameField.value.trim();
+    const driverName = carsDropdownField.value;
+    if (!riderName) return
+    if (!driverName) return
+
+    try {
+
+        const endpoint = rootUrl + "/api/send-rider-to-mongo/" + currEventId + "/" + driverName;
+        const res = await fetch(endpoint, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"riderName": riderName})
+        });
+        
+        location.reload()
 
     } catch (err) {
         console.log("error" + err);
     }
 
-
 });
+
 
 // Source - https://stackoverflow.com/a
 // Posted by ofundefined, modified by community. See post 'Timeline' for change history
