@@ -4,6 +4,7 @@ const newBoardForm = document.getElementById("newBoardForm");
 const eventNameField = document.getElementById("eventNameField");
 const eventDescField = document.getElementById("eventDescField");
 const eventDatetimeField = document.getElementById("eventDatetimeField");
+const eventLocationField = document.getElementById("eventLocationField");
 
 eventDatetimeField.min = new Date().toISOString(); // you cannot have an event in the past
 
@@ -13,16 +14,18 @@ newBoardForm.addEventListener("submit", async (e) => {
     const eventName = eventNameField.value.trim();
     const eventDesc = eventDescField.value.trim();
     const eventDatetime = eventDatetimeField.value;
+    const eventLocation = eventLocationField.value.trim();
     if (!eventName) return;
     if (!eventDesc) return;
-    if (!eventDatetimeField) return;
+    if (!eventDatetime) return;
+    if (!eventLocation) return;
         
     try {
         const endpoint = rootUrl + "/api/send-event-to-mongo";
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc, "eventDatetime": eventDatetime})
+            body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc, "eventLocation": eventLocation, "eventDatetime": eventDatetime})
         });
 
         console.log(eventName + eventDesc + eventDatetime);

@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field, EmailStr, validator, conint, constr
 class EventSubmission(BaseModel):
     eventName: constr(min_length=3, max_length=30)
     eventDesc: constr(max_length=500)
+    eventLocation: constr(max_length=500)
     eventDatetime: datetime
         
 # record classes add datetime
