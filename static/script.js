@@ -3,24 +3,30 @@ const rootUrl = "http://127.0.0.1:5000";
 const newBoardForm = document.getElementById("newBoardForm");
 const eventNameField = document.getElementById("eventNameField");
 const eventDescField = document.getElementById("eventDescField");
+const eventDatetimeField = document.getElementById("eventDatetimeField");
+
+eventDatetimeField.min = new Date().toISOString(); // you cannot have an event in the past
 
 newBoardForm.addEventListener("submit", async (e) => {
 
     e.preventDefault();
     const eventName = eventNameField.value.trim();
     const eventDesc = eventDescField.value.trim();
+    const eventDatetime = eventDatetimeField.value;
     if (!eventName) return;
     if (!eventDesc) return;
+    if (!eventDatetimeField) return;
         
     try {
         const endpoint = rootUrl + "/api/send-event-to-mongo";
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc})
+            body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc, "eventDatetime": eventDatetime})
         });
 
-        eventId = sha256(eventName + eventDesc).substring(0,6);
+        console.log(eventName + eventDesc + eventDatetime);
+        eventId = sha256(eventName + eventDesc + eventDatetime).substring(0,6);
 
         window.location.href = rootUrl + "/" + eventId;
         

@@ -36,7 +36,13 @@ def sendEventToMongo():
         return jsonify({"error": "validation error", "detail": ve.errors()}), 422
     
     received = datetime.now(timezone.utc)
-    strToHash = validatedFormData.dict()['eventName'] + validatedFormData.dict()['eventDesc'] # to do, change this to something that doesn't change, like the time of the event maybe idk
+    validatedFormDataDict = validatedFormData.dict()
+
+    datetimeStr = str(validatedFormDataDict['eventDatetime']) # this is in the format yyyy-mm-dd hh:mm:ss but javascript has it in the format yyyy-mm-ddThh:mm
+    datetimeStr = datetimeStr[:10] + 'T' + datetimeStr[11:16]
+    
+    strToHash = validatedFormDataDict['eventName'] + validatedFormDataDict['eventDesc'] + datetimeStr; # to do, change this to something that doesn't change, like the time of the event maybe idk
+    print(strToHash)
     hashedStr = hash(strToHash)
 
     # add additional information for record keeping
