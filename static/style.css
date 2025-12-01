@@ -107,7 +107,15 @@ hr {
 }
 
 #copyLinkButton {
+    background-color: white;
+    border: 5px solid white;
+    color: var(--color1);
     margin-bottom: 1% !important;
+}
+
+#copyLinkButton:hover {
+    transition: transform 0.5s;
+    transform: scale(1.1);
 }
 
 #addRiderForm {
