@@ -106,6 +106,10 @@ hr {
     margin-top: 4%;
 }
 
+#copyLinkButton {
+    margin-bottom: 1% !important;
+}
+
 #addRiderForm {
     margin-bottom: 1%;
 }

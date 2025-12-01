@@ -62,7 +62,7 @@ def getEventPage(eventId):
     event = events.find_one({'eventId' : eventId})
     # render it
     if (event is not None):
-        return render_template('event.html', eventName = event['eventName'])
+        return render_template('event.html', eventName = event['eventName'], eventDesc = event['eventDesc'])
     return render_template('eventDNE.html', eventId = eventId)
     
 @app.post('/api/send-car-to-mongo/<eventId>')

@@ -64,8 +64,6 @@ addRiderForm.addEventListener("submit", async (e) => {
 
 function refreshCars() {
 
-    console.log("this ran");
-
 // clear car elements from html
 
 allCarsDiv.innerHTML = "";
@@ -157,7 +155,6 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
             if (thisCar.takenSeats < thisCar.numberSeats) {
                 let newOption = document.createElement("option");
                 newOption.text = newOption.value = cars[i].driverName;
-                newOption.setAttribute("style", "color: red;");
                 carsDropdownField.add(newOption, 0);
             }
         }
