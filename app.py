@@ -108,7 +108,7 @@ def sendRiderToMongo(eventId, driverName):
     
     # this is kind of a goofy way to update the embedded documents but it works so yea :)
 
-    carsToUpdate = getEvent(eventId)['cars'] # this is an array of documents (which is also embedded within an event document)
+    carsToUpdate = getEventCars(eventId, driverName) # this is an array of documents (which is also embedded within an event document)
 
     for car in carsToUpdate: # each car is a document with an array of rider documents
         if car['driverName'] == driverName:
@@ -125,6 +125,23 @@ def sendRiderToMongo(eventId, driverName):
 
     return jsonify({"status": "ok"}), 200
 
+@app.post('/api/remove-car-from-mongo/<eventId>/<driverName>')
+def removeCarFromMongo(eventId, driverName):
+    carsToUpdate = getEventCars(eventId, driverName) # this is an array of documents / dictionaries (which is also embedded within an event document)
+
+    for car in carsToUpdate: # each car is a document with an array of rider documents
+        if car['driverName'] == driverName:
+            carsToUpdate.remove(car)
+
+    print(carsToUpdate)
+    
+    events.update_one( { "eventId": eventId }, { "$set" : { "cars": carsToUpdate }})
+
+    return jsonify({"status": "ok"}), 200
+
+@app.post('/api/remove-rider-to-mongo/<eventId>/<driverName>')
+def removeRiderFromMongo(eventId, driverName):
+    return
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()
@@ -132,5 +149,8 @@ def hash(str):
 def getEvent(eventId):
     return events.find_one({'eventId' : eventId})
 
+def getEventCars(eventId, driverName):
+    return getEvent(eventId)['cars']
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

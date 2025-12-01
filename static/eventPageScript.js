@@ -23,8 +23,31 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
 
         let newCarText = document.createElement("p")
         newCarText.innerText = thisCar['driverName'] + ": " + thisCar['takenSeats'] + " / " + thisCar['numberSeats']
-
         newCarDiv.appendChild(newCarText)
+
+        let newCarButton = document.createElement("button")
+        newCarButton.innerText = "remove " + thisCar['driverName']
+        newCarButton.addEventListener("click", async (e) => {
+
+            console.log(newCarButton.innerText + " clicked")
+
+            try {
+
+                const endpoint = rootUrl + "/api/remove-car-from-mongo/" + currEventId + "/" + thisCar['driverName'];
+                const res = await fetch(endpoint, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({"driverName": thisCar['driverName']})
+                });
+            
+                location.reload()
+
+            } catch (err) {
+                console.log("error" + err);
+            }
+        });
+        newCarDiv.appendChild(newCarButton)
+
 
         for (j=0; j<thisCar['riders'].length; j++) {
 
@@ -107,11 +130,26 @@ addRiderForm.addEventListener("submit", async (e) => {
 });
 
 function addClickListenerForRemoveButton(button) {
+
     button.addEventListener("click", async (e) => {
 
-        console.log(button.innerText + " was clicked");
+        try {
+
+        const endpoint = rootUrl + "/api/remove-rider-from-mongo/" + currEventId + "/" + driverName;
+        const res = await fetch(endpoint, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"riderName": riderName})
+        });
+        
+        location.reload()
+
+        } catch (err) {
+            console.log("error" + err);
+        }
 
     });
+
 }
 
 
