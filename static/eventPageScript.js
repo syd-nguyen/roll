@@ -99,7 +99,6 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
                         body: JSON.stringify({ driverName: thisCar.driverName })
                     });
 
-                    location.reload();
                 } catch (err) {
                     console.log("error" + err);
                 }
