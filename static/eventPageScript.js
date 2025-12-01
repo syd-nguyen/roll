@@ -61,6 +61,9 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
 
             // add their riders
 
+            let newRiderLeftDiv = document.createElement("div"); // left aligns the riders
+            newRiderLeftDiv.setAttribute("class", "leftRiderDiv");
+
             for (j = 0; j < thisCar.riders.length; j++) {
                 let newRiderDiv = document.createElement("div");
                 newRiderDiv.setAttribute("class", "riderDiv");
@@ -78,8 +81,10 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
 
                 addClickListenerForRemoveButton(newRiderButton, thisCar.driverName, thisRider.riderName);
 
-                newCarDiv.appendChild(newRiderDiv);
+                newRiderLeftDiv.appendChild(newRiderDiv);
             }
+
+            newCarDiv.appendChild(newRiderLeftDiv);
 
             document.body.appendChild(newCarDiv);
 
