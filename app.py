@@ -40,7 +40,7 @@ def sendEventToMongo():
 
     datetimeStr = str(validatedFormDataDict['eventDatetime']) # this is in the format yyyy-mm-dd hh:mm:ss but javascript has it in the format yyyy-mm-ddThh:mm
     datetimeStr = datetimeStr[:10] + 'T' + datetimeStr[11:16]
-    
+
     strToHash = validatedFormDataDict['eventName'] + validatedFormDataDict['eventDesc'] + datetimeStr; # to do, change this to something that doesn't change, like the time of the event maybe idk
     print(strToHash)
     hashedStr = hash(strToHash)
@@ -68,7 +68,13 @@ def getEventPage(eventId):
     event = events.find_one({'eventId' : eventId})
     # render it
     if (event is not None):
-        return render_template('event.html', eventName = event['eventName'], eventDesc = event['eventDesc'])
+        eventDatetime = event['eventDatetime'] # this is in the format yyyy-mm-dd hh:mm:ss; we change it to be in the forms mm.dd.yyyy and hh:mm am/pm
+        eventDate = str(eventDatetime.month) + '.' + str(eventDatetime.day) + '.' + str(eventDatetime.year)
+        if (eventDatetime.hour > 12):
+            eventTime = str(eventDatetime.hour - 12) + ":" + str(eventDatetime.minute) + " pm"
+        else:
+            eventTime = str(eventDatetime.hour) + ":" + str(eventDatetime.minute) + " am"
+        return render_template('event.html', eventName = event['eventName'], eventDesc = event['eventDesc'], eventLocation = event['eventLocation'], eventDate = eventDate, eventTime = eventTime)
     return render_template('eventDNE.html', eventId = eventId)
     
 @app.post('/api/send-car-to-mongo/<eventId>')

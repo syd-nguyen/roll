@@ -106,10 +106,18 @@ hr {
     margin-top: 4%;
 }
 
+#eventDesc {
+    text-align: center;
+    margin-bottom: 1%;
+    max-width: 50%;
+    margin: auto; /* centers it */
+}
+
 #copyLinkButton {
     background-color: white;
     border: 5px solid white;
     color: var(--color1);
+    margin-top: 1% !important;
     margin-bottom: 1% !important;
 }
 
