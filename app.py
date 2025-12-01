@@ -139,9 +139,30 @@ def removeCarFromMongo(eventId, driverName):
 
     return jsonify({"status": "ok"}), 200
 
-@app.post('/api/remove-rider-to-mongo/<eventId>/<driverName>')
-def removeRiderFromMongo(eventId, driverName):
-    return
+@app.post('/api/remove-rider-from-mongo/<eventId>/<driverName>/<riderName>')
+def removeRiderFromMongo(eventId, driverName, riderName):
+
+    carsToUpdate = getEventCars(eventId, driverName)
+
+    for car in carsToUpdate:
+        if car['driverName'] == driverName:
+            
+            ridersToUpdate = car['riders']
+
+            for rider in ridersToUpdate:
+                if rider['riderName'] == riderName:
+                    
+                    ridersToUpdate.remove(rider)
+
+                    takenSeatsToUpdate = car['takenSeats']
+                    takenSeatsToUpdate = takenSeatsToUpdate - 1
+                    car.update({'takenSeats': takenSeatsToUpdate})
+
+            car.update({'riders' : ridersToUpdate})
+    
+    events.update_one( { "eventId": eventId }, { "$set" : { "cars": carsToUpdate }})
+
+    return jsonify({"status": "ok"}), 200
 
 def hash(str):
     return sha256(str.encode('utf-8')).hexdigest()
