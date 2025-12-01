@@ -77,12 +77,7 @@ p {
     margin: 5px;
 }
 
-h1 {
-    text-align: center;
-    margin: 5px;
-}
-
-h2 {
+h1, h2, h3 {
     text-align: center;
     margin: 5px;
 }
