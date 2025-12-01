@@ -62,3 +62,4 @@ null
 {"eventName": "retreat", "eventDesc": "nature and friends", "receivedAt": "2025-11-29T11:28:20.376868+00:00", "eventHash": "5bac5161290ae1ab8c69877c5e1c3ed8cbed90ec319603f6e2087572cd368db5", "eventId": "5bac51", "cars": []}
 {"eventName": "retreat", "eventDesc": "nature and friends", "receivedAt": "2025-11-29T11:31:59.808681+00:00", "eventHash": "5bac5161290ae1ab8c69877c5e1c3ed8cbed90ec319603f6e2087572cd368db5", "eventId": "5bac51", "cars": []}
 {"eventName": "dinner", "eventDesc": "food", "receivedAt": "2025-11-29T11:51:23.012104+00:00", "eventHash": "da9b8a3edc1eee8fefa4a028cabf6d336fb679c102b8f3a63d48834d581bded1", "eventId": "da9b8a", "cars": []}
+{"eventName": "Syd's Bed Time", "eventDesc": "GO TO BED!!!!!", "receivedAt": "2025-12-01T14:17:49.318016+00:00", "eventHash": "5e66cdbd192c3728405e93db13e4e1b4d52c37ed81da29b2b06d7c2bcff6fe18", "eventId": "5e66cd", "cars": []}

@@ -6,7 +6,17 @@ const addCarForm = document.getElementById("addCarForm");
 const addRiderForm = document.getElementById("addRiderForm");
 // for some reason, you don't have to get the fields too, idk why
 
-// ** add car elements to html **
+const allCarsDiv = document.createElement("div");
+document.body.appendChild(allCarsDiv);
+refreshCars();
+
+function refreshCars() {
+
+// clear car elements from html
+
+allCarsDiv.innerHTML = "";
+
+// add car elements to html
 
 // get cars
 fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
@@ -86,7 +96,7 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
 
             newCarDiv.appendChild(newRiderLeftDiv);
 
-            document.body.appendChild(newCarDiv);
+            allCarsDiv.appendChild(newCarDiv);
 
             // add cars to dropdown list for riders IF they have open seats
             if (thisCar.takenSeats < thisCar.numberSeats) {
@@ -97,6 +107,8 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
             }
         }
     });
+
+}
 
 addCarForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -113,7 +125,7 @@ addCarForm.addEventListener("submit", async (e) => {
             body: JSON.stringify({ driverName: driverName, numberSeats: numberSeats, takenSeats: 0 })
         });
 
-        location.reload();
+        refreshCars();
     } catch (err) {
         console.log("error" + err);
     }
@@ -136,7 +148,7 @@ addRiderForm.addEventListener("submit", async (e) => {
             body: JSON.stringify({ riderName: riderName, riderPhone : riderPhone })
         });
 
-        location.reload();
+        refreshCars();
     } catch (err) {
         console.log("error" + err);
     }
@@ -153,7 +165,7 @@ function addClickListenerForRemoveButton(button, driverName, riderName) {
                 body: {}
             });
 
-            location.reload();
+            refreshCars();
         } catch (err) {
             console.log("error" + err);
         }
