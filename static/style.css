@@ -87,6 +87,10 @@ h2 {
     margin: 5px;
 }
 
+hr {
+    margin: 3px;
+}
+
 .centerPage {
     display: flex;
     flex-direction: column;
@@ -123,10 +127,14 @@ h2 {
     max-width: 25%;
 }
 
-.driverDiv, .riderDiv { /* puts items next to each other */
+.driverDiv { /* puts items next to each other */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.riderDiv { /* also puts items next to each other */
+
 }
 
 .removeButton {

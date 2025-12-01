@@ -3,10 +3,8 @@ var currEventId = window.location.href;
 currEventId = currEventId.substring(currEventId.length - 6, currEventId.length);
 
 const addCarForm = document.getElementById("addCarForm");
-const driverNameField = document.getElementById("driverNameField");
-const numberSeatsField = document.getElementById("numberSeatsField");
 const addRiderForm = document.getElementById("addRiderForm");
-const carsDropdownField = document.getElementById("carsDropdownField");
+// for some reason, you don't have to get the fields too, idk why
 
 // ** add car elements to html **
 
@@ -46,12 +44,22 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
             });
             newDriverDiv.appendChild(newCarButton);
             
-            let newCarText = document.createElement("p");
+            let newCarText = document.createElement("h3");
             newCarText.innerText =
                 thisCar.driverName + ": " + thisCar.takenSeats + " / " + thisCar.numberSeats;
             newDriverDiv.appendChild(newCarText);
             
             newCarDiv.appendChild(newDriverDiv);
+
+            // add a separator if necessary
+
+            if (thisCar.riders.length != 0) {
+                let horizontalRule = document.createElement("hr");
+                horizontalRule.setAttribute("width", "100%");
+                newCarDiv.appendChild(horizontalRule);
+            }
+
+            // add their riders
 
             for (j = 0; j < thisCar.riders.length; j++) {
                 let newRiderDiv = document.createElement("div");
@@ -65,8 +73,8 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
                 newRiderDiv.appendChild(newRiderButton);
                 
                 let newRiderText = document.createElement("p");
-                newRiderText.innerText = thisRider.riderName;
-                newRiderDiv.appendChild(newRiderText);                
+                newRiderText.innerText = thisRider.riderName + " " + makePhonePretty(thisRider.riderPhone);
+                newRiderDiv.appendChild(newRiderText);               
 
                 addClickListenerForRemoveButton(newRiderButton, thisCar.driverName, thisRider.riderName);
 
@@ -110,15 +118,17 @@ addRiderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const riderName = riderNameField.value.trim();
     const driverName = carsDropdownField.value;
+    const riderPhone = riderPhoneField.value;
     if (!riderName) return;
     if (!driverName) return;
+    if (!riderPhone) return;
 
     try {
         const endpoint = rootUrl + "/api/send-rider-to-mongo/" + currEventId + "/" + driverName;
         const res = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ riderName: riderName })
+            body: JSON.stringify({ riderName: riderName, riderPhone : riderPhone })
         });
 
         location.reload();
@@ -143,6 +153,11 @@ function addClickListenerForRemoveButton(button, driverName, riderName) {
             console.log("error" + err);
         }
     });
+}
+
+function makePhonePretty(phone) {
+    let phoneStr = phone + "";
+    return "(" + phoneStr.substring(0, 3) + ")\t" + phoneStr.substring(3, 6) + "-" + phoneStr.substring(6);
 }
 
 // Source - https://stackoverflow.com/a
