@@ -2,18 +2,135 @@
     --buttonbg: navy;
     --textcolor: white;
     --font: Montserrat;
+    --color1: #1D3C49;
+    --color2: #23AEA9;
+    --color3: #E9C46A;
+    --color4: #F4A261;
+    --color5: #E76F51;
 }
-/*
-button {
+
+body {
+    background-color: var(--color1);
+    color : white;
+}
+
+* {
     font-family: var(--font);
-    background-color: var(--buttonbg);
-    color: var(--textcolor);
-    font-size: 20px;
+}
+
+input {
     padding: 10px;
-    border: none;
     margin: 10px;
-}*/
+    background-color: var(--color2);
+    border: 5px solid var(--color2);
+    border-radius: 5px;
+    caret-color: white;
+    color: white;
+}
+
+::placeholder {
+    color: hsla(0, 0%, 100%, 0.65); /* white at specified opacity */
+}
+
+input:focus {
+    background-color: var(--color2);
+    border: 5px solid var(--color2);
+    border-radius: 5px;
+    outline: none;
+}
+
+select { /* dropdown */
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--color2);
+    border: 5px solid var(--color2);
+    border-radius: 5px;
+    color: white;
+}
+
+/* removes arrows from number input in chrome */
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--color3);
+    color: var(--color1);
+    border: 5px solid var(--color3);
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: var(--color4);
+    border-color: var(--color4);
+    transition: background-color 0.5s,  border-color 0.5s, transform 0.5s;
+    transform: scale(1.1);
+}
+
+form {
+    text-align: center;
+}
 
 p {
     margin: 5px;
+}
+
+h1 {
+    text-align: center;
+    margin: 5px;
+}
+
+h2 {
+    text-align: center;
+    margin: 5px;
+}
+
+.centerPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh; /* slightly less than view height removes the scroll bar */
+}
+
+/* specific to eventDNE.html */
+
+#oops {
+    color: var(--color4);
+}
+
+/* specific to event.html */
+
+#eventHeader {
+    margin-top: 4%;
+}
+
+#addRiderForm {
+    margin-bottom: 1%;
+}
+
+.carDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 0.5%;
+    border: 3px solid hsla(0, 0%, 100%, 0.65);
+    border-radius: 5px;
+    max-width: 25%;
+}
+
+.driverDiv, .riderDiv { /* puts items next to each other */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.removeButton {
+    padding: 5px;
+    background-color: var(--color4);
+    border-color: var(--color4);
 }

@@ -90,7 +90,9 @@ def sendCarToMongo(eventId):
 @app.get('/api/get-cars-for-event/<eventId>')
 def getCarsForEvent(eventId):
     event = getEvent(eventId)
-    return event['cars']
+    if event is not None:
+        return event['cars']
+    else: return []
 
 @app.post('/api/send-rider-to-mongo/<eventId>/<driverName>') # this finds the car via the driver name but it could be changed to be by an id
 def sendRiderToMongo(eventId, driverName):
@@ -132,8 +134,6 @@ def removeCarFromMongo(eventId, driverName):
     for car in carsToUpdate: # each car is a document with an array of rider documents
         if car['driverName'] == driverName:
             carsToUpdate.remove(car)
-
-    print(carsToUpdate)
     
     events.update_one( { "eventId": eventId }, { "$set" : { "cars": carsToUpdate }})
 
@@ -151,7 +151,7 @@ def removeRiderFromMongo(eventId, driverName, riderName):
 
             for rider in ridersToUpdate:
                 if rider['riderName'] == riderName:
-                    
+
                     ridersToUpdate.remove(rider)
 
                     takenSeatsToUpdate = car['takenSeats']

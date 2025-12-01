@@ -20,7 +20,7 @@ newBoardForm.addEventListener("submit", async (e) => {
             body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc})
         });
 
-        eventId = sha256(eventName + eventDesc).substring(0,6)
+        eventId = sha256(eventName + eventDesc).substring(0,6);
 
         window.location.href = rootUrl + "/" + eventId;
         

@@ -7,16 +7,16 @@
         <title>{{ eventName }} rideboard</title>
     </head>
     <body>
-        <h1>{{ eventName }} rideboard</h1>
+        <h1 id="eventHeader">{{ eventName }} rideboard</h1>
         <form id="addCarForm">
             <input id="driverNameField" type="text" placeholder="driver name" autocomplete="on" required />
-            <input id="numberSeatsField" type="number" autocomplete="on" required />
+            <input id="numberSeatsField" type="number" placeholder="available seats" autocomplete="on" required />
             <button type="submit">Add Car</button>
         </form>
 
         <form id="addRiderForm">
             <input id="riderNameField" type="text" placeholder="rider name" autocomplete="on" required />
-            <select id="carsDropdownField"> </select>
+            <select id="carsDropdownField" required> </select>
             <button type="submit">Add Rider</button>
         </form>
 
