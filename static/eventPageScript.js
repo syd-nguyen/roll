@@ -4,11 +4,63 @@ currEventId = currEventId.substring(currEventId.length - 6, currEventId.length);
 
 const addCarForm = document.getElementById("addCarForm");
 const addRiderForm = document.getElementById("addRiderForm");
+const copyLinkButton = document.getElementById("copyLinkButton");
+copyLinkButton.setAttribute("style", "margin: 0 auto; display: block;");
 // for some reason, you don't have to get the fields too, idk why
 
 const allCarsDiv = document.createElement("div");
 document.body.appendChild(allCarsDiv);
 refreshCars();
+
+copyLinkButton.addEventListener("click", async(e) => {
+    navigator.clipboard.writeText(window.location.href);
+    copyLinkButton.innerText = "copied link!"
+    setTimeout(function() { copyLinkButton.innerText = "copy link"}, 1250);
+});
+
+addCarForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const driverName = driverNameField.value.trim();
+    const numberSeats = numberSeatsField.value;
+    if (!driverName) return;
+    if (!numberSeats) return;
+
+    try {
+        const endpoint = rootUrl + "/api/send-car-to-mongo/" + currEventId;
+        const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ driverName: driverName, numberSeats: numberSeats, takenSeats: 0 })
+        });
+
+        refreshCars();
+    } catch (err) {
+        console.log("error" + err);
+    }
+});
+
+addRiderForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const riderName = riderNameField.value.trim();
+    const driverName = carsDropdownField.value;
+    const riderPhone = riderPhoneField.value;
+    if (!riderName) return;
+    if (!driverName) return;
+    if (!riderPhone) return;
+
+    try {
+        const endpoint = rootUrl + "/api/send-rider-to-mongo/" + currEventId + "/" + driverName;
+        const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ riderName: riderName, riderPhone : riderPhone })
+        });
+
+        refreshCars();
+    } catch (err) {
+        console.log("error" + err);
+    }
+});
 
 function refreshCars() {
 
@@ -109,50 +161,6 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
     });
 
 }
-
-addCarForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const driverName = driverNameField.value.trim();
-    const numberSeats = numberSeatsField.value;
-    if (!driverName) return;
-    if (!numberSeats) return;
-
-    try {
-        const endpoint = rootUrl + "/api/send-car-to-mongo/" + currEventId;
-        const res = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ driverName: driverName, numberSeats: numberSeats, takenSeats: 0 })
-        });
-
-        refreshCars();
-    } catch (err) {
-        console.log("error" + err);
-    }
-});
-
-addRiderForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const riderName = riderNameField.value.trim();
-    const driverName = carsDropdownField.value;
-    const riderPhone = riderPhoneField.value;
-    if (!riderName) return;
-    if (!driverName) return;
-    if (!riderPhone) return;
-
-    try {
-        const endpoint = rootUrl + "/api/send-rider-to-mongo/" + currEventId + "/" + driverName;
-        const res = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ riderName: riderName, riderPhone : riderPhone })
-        });
-
-        refreshCars();
-    } catch (err) {
-        console.log("error" + err);
-    }
-});
 
 function addClickListenerForRemoveButton(button, driverName, riderName) {
     button.addEventListener("click", async (e) => {
