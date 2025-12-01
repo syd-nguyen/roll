@@ -64,6 +64,8 @@ addRiderForm.addEventListener("submit", async (e) => {
 
 function refreshCars() {
 
+    console.log("this ran");
+
 // clear car elements from html
 
 allCarsDiv.innerHTML = "";
@@ -98,6 +100,8 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ driverName: thisCar.driverName })
                     });
+
+                    refreshCars();
 
                 } catch (err) {
                     console.log("error" + err);
@@ -158,6 +162,8 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
             }
         }
     });
+
+    document.body.appendChild(allCarsDiv);
 
 }
 
