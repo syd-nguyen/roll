@@ -19,4 +19,4 @@ class CarSubmission(BaseModel):
 
 class RiderSubmission(BaseModel):
     riderName: constr(min_length=3, max_length=30)
-    riderPhone: conint(ge=1000000000)
+    riderPhone: conint(ge=1000000000, le=9999999999)
