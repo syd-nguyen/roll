@@ -17,18 +17,33 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
         let thisCar = cars[i]
 
         // add cars to document body, also add their riders
-        let newDiv = document.createElement("div")
-        newDiv.setAttribute("style", "border: 3px solid gray; padding: 5px; width: 20%;")
-        let newCar = document.createElement("p")
-        newCar.innerText = thisCar['driverName'] + ": " + thisCar['takenSeats'] + " / " + thisCar['numberSeats']
-        newDiv.appendChild(newCar)
+
+        let newCarDiv = document.createElement("div")
+        newCarDiv.setAttribute("style", "border: 3px solid gray; padding: 5px; width: 20%;")
+
+        let newCarText = document.createElement("p")
+        newCarText.innerText = thisCar['driverName'] + ": " + thisCar['takenSeats'] + " / " + thisCar['numberSeats']
+
+        newCarDiv.appendChild(newCarText)
+
         for (j=0; j<thisCar['riders'].length; j++) {
+
+            let newRiderDiv = document.createElement("div")
+
             let thisRider = thisCar['riders'][j]
-            let newRider = document.createElement("p")
-            newRider.innerText = thisRider.riderName
-            newDiv.appendChild(newRider)
+            let newRiderText = document.createElement("p")
+            newRiderText.innerText = thisRider.riderName
+            newRiderDiv.appendChild(newRiderText)
+
+            let newRiderButton = document.createElement("button")
+            newRiderButton.innerText = "remove " + thisRider.riderName
+            newRiderButton.setAttribute("id", thisRider.riderName + "Button")
+            newRiderDiv.appendChild(newRiderButton)
+
+            newCarDiv.appendChild(newRiderDiv)
         }
-        document.body.appendChild(newDiv);
+
+        document.body.appendChild(newCarDiv);
 
         // add cars to dropdown list for riders IF they have open seats
         if (thisCar.takenSeats < thisCar.numberSeats) {
