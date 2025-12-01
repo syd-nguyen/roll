@@ -2,7 +2,7 @@
 
 ## ⭐ Executive Summary
 
-### Problem
+### ❔ Problem
 
 _It's a busy world out there! There's things to do, places to be, people to see, and more... but! it's better when it's done together._
 
@@ -10,17 +10,25 @@ Carpooling is the manifestation of this. In many contexts, but especially in col
 
 * __Someone has to make the board:__ Whether it's someone who haphazardly throws it together or someone who spends a whole third-hour on it, someone has to make the board. They have sit down and make a spreadsheet and add headers and type up everything.
 * __The formatting varies:__ Because a different person makes the board everytime, it always turns out different. Sometimes passengers have to put their phone number, sometimes they don't, sometimes they have to put their pickup location, sometimes they don't, etc.
-* __The link is long and not guarenteed to work:__ A spreadsheet link is something like "https://docs.google.com/spreadsheets/d/234w5sb8hcyjagsfjk12jgk-jn391o2i256351hndh21yy3989213/edit?usp=sharing" which is long and unwieldy. The permissions on the sheet might also be set incorrectly, so the link might have to be edited and fixed.
+* __The link is long and not guaranteed to work:__ A spreadsheet link is something like "https://docs.google.com/spreadsheets/d/234w5sb8hcyjagsfjk12jgk-jn391o2i256351hndh21yy3989213/edit?usp=sharing" which is long and unwieldy. The permissions on the sheet might also be set incorrectly, so the link might have to be edited and fixed.
 
 It technically ain't broke, but it sure ain't rich either.
 
-### Solution
+### ✔️ Solution
 
 _roll_ is a website that makes creating rideboards simple and easy. Creating a rideboard for an event is a breeze — just fill out a few fields and click a button! Each event has its own page with a shareable link in the form `roll.xyz/######` where `######` is a unique, alphanumeric id. On that page, users can add and delete cars and riders as necessary, as well as see all existing cars and riders.
 
 ## System Overview
 
 ### Course Concepts
+
+_roll_ makes use of the following course concepts:
+
+* GitHub version control
+* Docker containerization
+* Flask app creation
+* NoSQL data in MongoDB
+* Pydantic data validation
 
 ### Architecture Diagram
 
