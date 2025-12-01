@@ -19,7 +19,7 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
         // add cars to document body, also add their riders
 
         let newCarDiv = document.createElement("div")
-        newCarDiv.setAttribute("style", "border: 3px solid gray; padding: 5px; width: 20%;")
+        newCarDiv.setAttribute("style", "border: 3px solid gray; padding: 3px; width: 20%; margin-top: 10px;")
 
         let newCarText = document.createElement("p")
         newCarText.innerText = thisCar['driverName'] + ": " + thisCar['takenSeats'] + " / " + thisCar['numberSeats']
@@ -39,6 +39,8 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId).then((response) => res
             newRiderButton.innerText = "remove " + thisRider.riderName
             newRiderButton.setAttribute("id", thisRider.riderName + "Button")
             newRiderDiv.appendChild(newRiderButton)
+
+            addClickListenerForRemoveButton(newRiderButton);
 
             newCarDiv.appendChild(newRiderDiv)
         }
@@ -103,6 +105,14 @@ addRiderForm.addEventListener("submit", async (e) => {
     }
 
 });
+
+function addClickListenerForRemoveButton(button) {
+    button.addEventListener("click", async (e) => {
+
+        console.log(button.innerText + " was clicked");
+
+    });
+}
 
 
 // Source - https://stackoverflow.com/a
