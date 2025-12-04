@@ -67,6 +67,7 @@ function refreshCars() {
 // clear car elements from html
 
 allCarsDiv.innerHTML = "";
+carsDropdownField.innerHTML = "";
 
 // add car elements to html
 
@@ -75,8 +76,6 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
     .then((response) => response.json())
     .then((cars) => {
         
-        carsDropdownField.innerHTML = "" // clear this first
-
         for (i = 0; i < cars.length; i++) {
             let thisCar = cars[i];
 
@@ -158,7 +157,7 @@ fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
             if (thisCar.takenSeats < thisCar.numberSeats) {
                 let newOption = document.createElement("option");
                 newOption.text = newOption.value = cars[i].driverName;
-                carsDropdownField.add(newOption, 0);
+                carsDropdownField.add(newOption);
             }
         }
     });
