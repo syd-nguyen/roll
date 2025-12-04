@@ -2,16 +2,16 @@
     --buttonbg: navy;
     --textcolor: white;
     --font: Montserrat;
-    --color1: #1D3C49;
-    --color2: #23AEA9;
-    --color3: #E9C46A;
-    --color4: #F4A261;
-    --color5: #E76F51;
+    --color1: #1d3c49;
+    --color2: #23aea9;
+    --color3: #e9c46a;
+    --color4: #f4a261;
+    --color5: #e76f51;
 }
 
 body {
     background-color: var(--color1);
-    color : white;
+    color: white;
 }
 
 * {
@@ -39,7 +39,8 @@ input:focus {
     outline: none;
 }
 
-select { /* dropdown */
+select {
+    /* dropdown */
     padding: 10px;
     margin: 10px;
     background-color: var(--color2);
@@ -49,8 +50,8 @@ select { /* dropdown */
 }
 
 /* removes arrows from number input in chrome */
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 button {
@@ -65,7 +66,10 @@ button {
 button:hover {
     background-color: var(--color4);
     border-color: var(--color4);
-    transition: background-color 0.5s,  border-color 0.5s, transform 0.5s;
+    transition:
+        background-color 0.5s,
+        border-color 0.5s,
+        transform 0.5s;
     transform: scale(1.1);
 }
 
@@ -77,7 +81,9 @@ p {
     margin: 5px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     text-align: center;
     margin: 5px;
 }
@@ -92,6 +98,37 @@ hr {
     justify-content: center;
     align-items: center;
     min-height: 95vh; /* slightly less than view height removes the scroll bar */
+}
+
+#dimmer {
+    /* doesn't actually dim the background, but does allow user to close the newBoardWindow by clicking outside of it */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--color1);
+    z-index: 1;
+    visibility: hidden;
+}
+
+#newBoardWindow {
+    background-color: var(--color1);
+    box-shadow: 0 0 10px 5px #22414e; /* var(--color1) but slightly lighter and with less opacity */
+    position: fixed;
+    padding: 20px;
+    width: 50%;
+    height: 80%;
+    border-radius: 10px;
+    max-height: 80%;
+    z-index: 2;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    visibility: hidden; /* change this to make workWindow show */
+}
+
+.eventInput {
+    width: 80%;
 }
 
 /* specific to eventDNE.html */
@@ -141,7 +178,8 @@ hr {
     max-width: 25%;
 }
 
-.driverDiv { /* puts items next to each other */
+.driverDiv {
+    /* puts items next to each other */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,7 +191,8 @@ hr {
     align-items: center;
 }
 
-.leftRiderDiv { /* also puts items next to each other */
+.leftRiderDiv {
+    /* also puts items next to each other */
     display: flex;
     flex-direction: column;
     align-items: flex-start;

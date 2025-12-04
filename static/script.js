@@ -8,6 +8,21 @@ const eventLocationField = document.getElementById("eventLocationField");
 
 eventDatetimeField.min = new Date().toISOString(); // you cannot have an event in the past
 
+const dimmer = document.getElementById("dimmer");
+const newBoardButton = document.getElementById("newBoardButton");
+const newBoardWindow = document.getElementById("newBoardWindow");
+
+dimmer.addEventListener("click", (e) => {
+    dimmer.style.visibility = "hidden";
+    newBoardWindow.style.visibility = "hidden";
+});
+
+newBoardButton.addEventListener("click", (e) => {
+    dimmer.style.visibility = "visible";
+    newBoardWindow.style.visibility = "visible";
+    newBoardWindow.scrollTop = 0;
+});
+
 newBoardForm.addEventListener("submit", async (e) => {
 
     e.preventDefault();
