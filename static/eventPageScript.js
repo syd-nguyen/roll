@@ -74,6 +74,9 @@ allCarsDiv.innerHTML = "";
 fetch(rootUrl + "/api/get-cars-for-event/" + currEventId)
     .then((response) => response.json())
     .then((cars) => {
+        
+        carsDropdownField.innerHTML = "" // clear this first
+
         for (i = 0; i < cars.length; i++) {
             let thisCar = cars[i];
 
