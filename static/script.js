@@ -46,7 +46,10 @@ newBoardForm.addEventListener("submit", async (e) => {
         console.log(eventName + eventDesc + eventDatetime);
         eventId = sha256(eventName + eventDesc + eventDatetime).substring(0,6);
 
-        window.location.href = rootUrl + "/" + eventId;
+        resJson = await res.json();
+        if (resJson.status == 'ok')
+            window.location.href = rootUrl + "/" + eventId;
+        else console.log(resJson.detail[0]['msg'] + " " + resJson.detail[0]['loc']);
         
     } catch (err) {
         console.log("error");
