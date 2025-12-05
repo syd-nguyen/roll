@@ -83,7 +83,7 @@ Additionally, as mentioned previously, the Pydantic validation is more complex t
 
 ### 🔒 Security / Privacy
 
-Secrets are stored as environment variables, inaccessible to regular users. This includes the access information for the MongoDB database.Inputs are validated using Pydantic so they are not too long. Personally-identifiable information is stored in the private MongoDB database.
+There is only one secret for this project, which is the connection string for the MongoDB database. This is stored as an environment variable, inaccessible to regular users. Additionally, only certain IP addresses are allowed to access it. Inputs are validated using Pydantic so they are not too long. Personally-identifiable information is stored in the private MongoDB database.
 
 ### ⏱️ Ops
 
@@ -91,22 +91,40 @@ Making a rideboard and adding drivers and riders is very fast and does not take 
 
 ## Results & Evaluation
 
-### Sample Outputs
+### 😊 Sample Outputs
 
-### Performance Notes & Resource Footprints (optional, prob won't need)
+There are three types of pages within _roll_: the homepage where users can create a rideboard, an event page where users can view and edit a rideboard, and an event DNE page that shows when a user tries to a view an rideboard that does not exist. There are also modals that popup within the first two of those pages. These are shown below.
 
-### Validation Tests
+_Home Page_
 
+ADD TWO IMAGES HERE
 
-## What's Next
+_Event Page_
 
-### Planned Improvements, Refactors, and Features
+ADD THREE IMAGES HERE
+
+_Event DNE Page_
+
+![eventdne](./assets/eventdne.png)
+
+### 🗒️ Performance Note
+
+Whenever a new car or rider is added, the HTML is completely nixed and all the cars are added again. This could potentially be slowed by user internet speed and/or a large number of cars and riders.
+
+### ☑️ Validation Tests
+
+As mentioned, inputs are validated using Pydantic. Below are images of what happens when users try to enter inputs that don't follow the models.
+
+ADD IMAGE HERE
+
+## 🔮 What's Next
+
+### 🎨 Planned Improvements, Refactors, and Features
 
 * better phone number validation
 * better hashing, some 6 digits might be the same so just use the second 6 digits etc.
 
-## Links
+## 🔗 Links
 
-### Github Repo
-
-### Public Cloud App
+[Github Repository](https://github.com/syd-nguyen/roll)
+[Public Cloud App]()
