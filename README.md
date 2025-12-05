@@ -16,9 +16,9 @@ Carpooling is the manifestation of this. In many contexts, but especially in col
 
 _roll_ is a website that makes creating rideboards simple and easy. Creating a rideboard for an event is a breeze — just fill out a few fields and click a button! Each event has its own page with a shareable link in the form `roll.xyz/######` where `######` is a unique, alphanumeric id. On that page, users can add and delete cars and riders as necessary, as well as see all existing cars and riders.
 
-## System Overview
+## 🛠️ System Overview
 
-### Course Concepts
+### 🧰 Course Concepts
 
 _roll_ makes use of the following course concepts:
 
@@ -28,11 +28,11 @@ _roll_ makes use of the following course concepts:
 * NoSQL data in MongoDB
 * Pydantic data validation
 
-### Architecture Diagram
+### 📐 Architecture Diagram
 
 ![image](./assets/diagram.png)
 
-### Data / Models / Services
+### 🗃️ Data / Models / Services
 
 Data in _roll_ is stored in a MongoDB database. All events are stored in one container. Each event is a document with the following information:
 
@@ -57,31 +57,37 @@ The `riders` for an event is also an array of documents. Each rider document has
 
 The data is created when users create events and is thus of a variable size. All data is kept private.
 
-## How to Run (Local)
+## ▶️ How to Run (Local)
 
-### Docker
+### 📦 Docker
 
 _roll_ is available as a public Docker image at [this Docker Hub repository](https://hub.docker.com/repository/docker/cvv8cb/roll/general). To run the image, execute the following command:
 
 `docker run -it cvv8cb/roll:latest`
 
+## ✒️ Design Decisions
 
-## Design Decisions
+### 💭 Why these Concepts
 
-* GitHub version control
-* Docker containerization
-* Flask app creation
-* NoSQL data in MongoDB
-* Pydantic data validation
+I chose to use Flask to create my app because of its simplicity and straightforwardness. I had to create quite a few endpoints, and Flask made that easy. The fact that it works in Python was also good because MongoDB works with Python; they could integrate together well.
 
-### Why these Concepts
+I chose to use Pydantic to validate my data because of how versatile it can be. Admittedly, for the simple input validation I had, I probably could have used the build in functionality of HTML (ie. the `max ` and `min` attributes of `<input>` elements). However, using Pydantic gave me an opportunity to learn more about it and the potential for more development in the future. One specific opportunity it provides is more in-depth phone number validation.
 
-### Tradeoffs
+I chose to store my data in MongoDB because of its flexibility and readability. SQL data is something I'm familiar with, but I wanted to store everything together, as opposed to multiple tables referencing one another. So, I chose to use MongoDB documents. Mongo also worked well with Flask and Pydantic since everything was in Python.
 
-### Security / Privacy
+### 🔁 Tradeoffs
 
-### Ops
+One tradeoff of using MongoDB is that accessing the nested documents is a pain. This can be seen in the functions to add and remove riders. Additionally, if a driver exists across multiple rideboards, there will be two entries of that driver; this has the potential to unnecessarily overload the data storage in the future. However, the benefit gained in the Mongo storage is that everything for one event (ie. one rideboard) is consolidated in one place.
 
+Additionally, as mentioned previously, the Pydantic validation is more complex than just using HTML features. However, it is also more maintainable and extendable. Its complexity is useful for the future.
+
+### 🔒 Security / Privacy
+
+Secrets are stored as environment variables, inaccessible to regular users. This includes the access information for the MongoDB database.Inputs are validated using Pydantic so they are not too long. Personally-identifiable information is stored in the private MongoDB database.
+
+### ⏱️ Ops
+
+Making a rideboard and adding drivers and riders is very fast and does not take long at all. This could become slower, though, if an event has a large number of cars. Each car is limited to a maximum of 15 riders, but each event can have an unlimited number of cars. Future development can look into optimizing the functionality.
 
 ## Results & Evaluation
 
