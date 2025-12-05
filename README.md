@@ -30,7 +30,7 @@ _roll_ makes use of the following course concepts:
 
 ### Architecture Diagram
 
-![image](../assets/diagram.png)
+![image](./assets/diagram.png)
 
 ### Data / Models / Services
 
