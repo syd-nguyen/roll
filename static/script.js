@@ -49,8 +49,12 @@ newBoardForm.addEventListener("submit", async (e) => {
         resJson = await res.json();
         if (resJson.status == 'ok')
             window.location.href = rootUrl + "/" + eventId;
-        else console.log(resJson.detail[0]['msg'] + " " + resJson.detail[0]['loc']);
-        
+        else {
+            errorMsg = document.createElement("p");
+            errorMsg.setAttribute("style", "'text-align: center; max-width: 50%;'");
+            errorMsg.innerText = "error: " + resJson.detail[0]['msg'] + " – " + resJson.detail[0]['loc'];
+            newBoardWindow.appendChild(errorMsg);
+        }
     } catch (err) {
         console.log("error");
     }
