@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 
-client = MongoClient("mongodb+srv://sydnguyen:uva343TL%23%2B%23%2B@cluster0.9srpoaq.mongodb.net/?appName=Cluster0") # remember to add this as an environment variable later
+client = MongoClient(os.environ['CONNECTION_STRING'])
 db = client["main"]
 events = db["events"]
 
