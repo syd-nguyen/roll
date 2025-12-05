@@ -123,8 +123,9 @@ ADD IMAGE HERE
 
 * better phone number validation
 * better hashing, some 6 digits might be the same so just use the second 6 digits etc.
+* better domain
 
 ## 🔗 Links
 
 [Github Repository](https://github.com/syd-nguyen/roll)
-[Public Cloud App]()
+[Public Cloud App](https://rollapp.azurewebsites.net/)
