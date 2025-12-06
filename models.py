@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, Field, EmailStr, validator, conint, constr
+from pydantic import BaseModel, conint, constr
 
 class EventSubmission(BaseModel):
     eventName: constr(min_length=3, max_length=30)
