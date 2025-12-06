@@ -6,7 +6,7 @@
 
 _It's a busy world out there! There's things to do, places to be, people to see, and more... but! it's better when it's done together._
 
-Carpooling is the manifestation of this. In many contexts, but especially in college, many people have a place to be but not all of those people have a car. Carpooling helps them get where they need to go more efficiently. To coordinate this, college students will often create "rideboards." These are usually just spreadsheets. It works, it's not the best system for a few reasons:
+Carpooling is the manifestation of this. In many contexts, but especially in college, many people have a place to be but not all of those people have a car. Carpooling helps them get where they need to go more efficiently. To coordinate this, college students will often create "rideboards." These are usually just spreadsheets. It works, but it's not the best system for a few reasons:
 
 * __Someone has to make the board:__ Whether it's someone who haphazardly throws it together or someone who spends a whole third-hour on it, someone has to make the board. They have sit down and make a spreadsheet and add headers and type up everything.
 * __The formatting varies:__ Because a different person makes the board everytime, it always turns out different. Sometimes passengers have to put their phone number, sometimes they don't, sometimes they have to put their pickup location, sometimes they don't, etc.
@@ -14,7 +14,7 @@ Carpooling is the manifestation of this. In many contexts, but especially in col
 
 ### ✔️ Solution
 
-_roll_ is a website that makes creating rideboards simple and easy. Creating a rideboard for an event is a breeze — just fill out a few fields and click a button! Each event has its own page with a shareable link in the form `roll.xyz/######` where `######` is a unique, alphanumeric id. On that page, users can add and delete cars and riders as necessary, as well as see all existing cars and riders.
+_roll_ is a website that makes creating rideboards simple and easy. Creating a rideboard for an event is a breeze — just fill out a few fields and click a button! Each event has its own page with a shareable link in the form `something/######` where the `something` is where the website is running (eg. 120.0.0.1) and `######` is a unique, alphanumeric id. On that page, users can add and delete cars and riders as necessary, as well as see all existing cars and riders.
 
 ## 🛠️ System Overview
 
@@ -34,7 +34,7 @@ _roll_ makes use of the following course concepts:
 
 ### 🗃️ Data / Models / Services
 
-Data in _roll_ is stored in a MongoDB database. All events are stored in one container. Each event is a document with the following information:
+Data in _roll_ is stored in a MongoDB database. All events are stored in one container. Each `event` is a document with the following information:
 
 * name
 * description
@@ -55,7 +55,7 @@ The `riders` for an event is also an array of documents. Each rider document has
 * rider name
 * rider phone number
 
-The data is created when users create events and is thus of a variable size. All data is kept private.
+The data is created when users create events and is thus of variable size. All data is kept private.
 
 ## ▶️ How to Run (Local)
 
@@ -71,7 +71,7 @@ _roll_ is available as a public Docker image at [this Docker Hub repository](htt
 
 I chose to use Flask to create my app because of its simplicity and straightforwardness. I had to create quite a few endpoints, and Flask made that easy. The fact that it works in Python was also good because MongoDB works with Python; they could integrate together well.
 
-I chose to use Pydantic to validate my data because of how versatile it can be. Admittedly, for the simple input validation I had, I probably could have used the build in functionality of HTML (ie. the `max ` and `min` attributes of `<input>` elements). However, using Pydantic gave me an opportunity to learn more about it and the potential for more development in the future. One specific opportunity it provides is more in-depth phone number validation.
+I chose to use Pydantic to validate my data because of how versatile it can be. Admittedly, for the simple input validation I had, I probably could have used the built in functionality of HTML (ie. the `max ` and `min` attributes of `<input>` elements). However, using Pydantic gave me an opportunity to learn more about it and the potential for more development in the future. One specific opportunity it provides is more in-depth phone number validation.
 
 I chose to store my data in MongoDB because of its flexibility and readability. SQL data is something I'm familiar with, but I wanted to store everything together, as opposed to multiple tables referencing one another. So, I chose to use MongoDB documents. Mongo also worked well with Flask and Pydantic since everything was in Python.
 
@@ -126,10 +126,10 @@ As mentioned, inputs are validated using Pydantic. Below is an image of what hap
 Right now, _roll_ is not perfect for a couple reasons:
 
 * Phone numbers are not properly validated. Instead of using Pydantic's phone number features, it just treats the number as an integer and makes sure it is the right amount of digits.
-* Event ID's are the first six character of a hash of the event name, description, time, etc. These are all values that can change, so I probably want to figure out something better to base the hash off of. Also, there is a chance that the first size characters are the same even if the whole hash isn't the same.
-* Despite my efforts, the app is not publicly deployed, so nobody can really use it right now. I tried very hard to deploy it using both Azure and Render, but I couldn't get it to work.
+* Event ID's are the first six character of a hash of the event name, description, time, etc. These are all values that can change, so I probably want to figure out something better to base the hash off of. Also, there is a chance that the first six characters are the same even if the whole hash isn't the same.
+* Despite my efforts, the app is not publicly deployed — so nobody can really use it right now. I tried very hard to deploy it using both Azure and Render, but I couldn't get it to work.
 
-Those are functionality things, but that isn't all I want to add. Here are some things that I'd like users to be able to do, for fun and for increased usefulness:
+Those are functionality things, but that isn't all that I want to add. Here are some things that I'd like users to be able to do, for fun and for increased usefulness:
 
 * edit event, rider, and driver details
 * add more details (eg. event category, rider pickup location, driver car description)
@@ -137,6 +137,8 @@ Those are functionality things, but that isn't all I want to add. Here are some 
 * minimally sign in (like when2meet)
 * quick export rider phone numbers (so drivers can make group chats easily)
 * add riders to a waitlist if all cars are full
+
+Ideally, I will continue to develop this into a fully fledged app.
 
 ## 🔗 Links
 
