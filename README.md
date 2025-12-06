@@ -128,4 +128,3 @@ ADD IMAGE HERE
 ## 🔗 Links
 
 [Github Repository](https://github.com/syd-nguyen/roll)
-[Public Cloud App](https://rollapp.azurewebsites.net/)
