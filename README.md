@@ -63,7 +63,7 @@ The data is created when users create events and is thus of variable size. All d
 
 _roll_ is available as a public Docker image at [this Docker Hub repository](https://hub.docker.com/repository/docker/cvv8cb/roll/general). To run the image, execute the following command:
 
-`docker run -it cvv8cb/roll:latest`
+`docker run -it --rm  -p 8080:8080 cvv8cb/roll:latest`
 
 ## ✒️ Design Decisions
 
