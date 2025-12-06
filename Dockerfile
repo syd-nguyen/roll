@@ -6,3 +6,4 @@ CMD ["python", "app.py"]
 COPY app.py /app.py
 COPY storage.py /storage.py
 COPY models.py /models.py
+COPY . .
