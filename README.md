@@ -115,18 +115,30 @@ Whenever a new car or rider is added, the HTML is completely nixed and all the c
 
 ### ☑️ Validation Tests
 
-As mentioned, inputs are validated using Pydantic. Below are images of what happens when users try to enter inputs that don't follow the models.
+As mentioned, inputs are validated using Pydantic. Below is an image of what happens when someone tries to enter an input that doesn't follow the model.
 
-ADD IMAGE HERE
+![error](./assets/error.png)
 
 ## 🔮 What's Next
 
-### 🎨 Planned Improvements, Refactors, and Features
+### 🎨 Planned / Potential Improvements
 
-* better phone number validation
-* better hashing, some 6 digits might be the same so just use the second 6 digits etc.
-* better domain
+Right now, _roll_ is not perfect for a couple reasons:
+
+* Phone numbers are not properly validated. Instead of using Pydantic's phone number features, it just treats the number as an integer and makes sure it is the right amount of digits.
+* Event ID's are the first six character of a hash of the event name, description, time, etc. These are all values that can change, so I probably want to figure out something better to base the hash off of. Also, there is a chance that the first size characters are the same even if the whole hash isn't the same.
+* Despite my efforts, the app is not publicly deployed, so nobody can really use it right now. I tried very hard to deploy it using both Azure and Render, but I couldn't get it to work.
+
+Those are functionality things, but that isn't all I want to add. Here are some things that I'd like users to be able to do, for fun and for increased usefulness:
+
+* edit event, rider, and driver details
+* add more details (eg. event category, rider pickup location, driver car description)
+* add an event to Google Calendar
+* minimally sign in (like when2meet)
+* quick export rider phone numbers (so drivers can make group chats easily)
+* add riders to a waitlist if all cars are full
 
 ## 🔗 Links
 
 [Github Repository](https://github.com/syd-nguyen/roll)
+[Docker Repository](https://hub.docker.com/repository/docker/cvv8cb/roll/general)
