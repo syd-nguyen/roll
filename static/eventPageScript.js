@@ -1,4 +1,4 @@
-const rootUrl = "http://127.0.0.1:5000";
+const rootUrl = "http://localhost:8080";
 var currEventId = window.location.href;
 currEventId = currEventId.substring(currEventId.length - 6, currEventId.length);
 
