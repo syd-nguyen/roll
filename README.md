@@ -63,7 +63,9 @@ The data is created when users create events and is thus of variable size. All d
 
 _roll_ is available as a public Docker image at [this Docker Hub repository](https://hub.docker.com/repository/docker/cvv8cb/roll/general). To run the image, execute the following command:
 
-`docker run -it --rm  -p 8080:8080 cvv8cb/roll:latest`
+` docker run -it --rm  -p 8080:8080 --env-file .env -e CONNECTION_STRING="<personal-connection-string>" cvv8cb/roll:latest`
+
+where `<personal-connection-string>` is the specific string from your MongoDB account.
 
 ## ✒️ Design Decisions
 
@@ -83,7 +85,7 @@ Additionally, as mentioned previously, the Pydantic validation is more complex t
 
 ### 🔒 Security / Privacy
 
-There is only one secret for this project, which is the connection string for the MongoDB database. This is stored as an environment variable, inaccessible to regular users. Additionally, only certain IP addresses are allowed to access it. Inputs are validated using Pydantic so they are not too long. Personally-identifiable information is stored in the private MongoDB database.
+There is only one secret for this project, which is the connection string for the MongoDB database. This is stored as an environment variable, inaccessible to regular users and set at runtime. Additionally, only certain IP addresses are allowed to access it. Inputs are validated using Pydantic so they are not too long. Personally-identifiable information is stored in the private MongoDB database.
 
 ### ⏱️ Ops
 
