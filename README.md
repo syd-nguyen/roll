@@ -137,6 +137,7 @@ Those are functionality things, but that isn't all that I want to add. Here are 
 * minimally sign in (like when2meet)
 * quick export rider phone numbers (so drivers can make group chats easily)
 * add riders to a waitlist if all cars are full
+* change color scheme of rideboard
 
 Ideally, I will continue to develop this into a fully fledged app.
 
