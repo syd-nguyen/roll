@@ -6,7 +6,7 @@
 
 _It's a busy world out there! There's things to do, places to be, people to see, and more... but! it's better when it's done together._
 
-Carpooling is the manifestation of this. In many contexts, but especially in college, many people have a place to be but not all of those people have a car. Carpooling helps them get where they need to go more efficiently. To coordinate this, college students will often create "rideboards." These are usually just spreadsheets, which works but is not the best system for a few reasons:
+Carpooling is the manifestation of this. In many contexts, but especially in college, many people have a place to be but not all of those people have a car. Carpooling helps them get where they need to go more efficiently. To coordinate this, college students will often create "rideboards." These are usually just spreadsheets. It works, it's not the best system for a few reasons:
 
 * __Someone has to make the board:__ Whether it's someone who haphazardly throws it together or someone who spends a whole third-hour on it, someone has to make the board. They have sit down and make a spreadsheet and add headers and type up everything.
 * __The formatting varies:__ Because a different person makes the board everytime, it always turns out different. Sometimes passengers have to put their phone number, sometimes they don't, sometimes they have to put their pickup location, sometimes they don't, etc.
