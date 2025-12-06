@@ -63,9 +63,9 @@ The data is created when users create events and is thus of variable size. All d
 
 _roll_ is available as a public Docker image at [this Docker Hub repository](https://hub.docker.com/repository/docker/cvv8cb/roll/general). To run the image, execute the following command:
 
-` docker run -it --rm  -p 8080:8080 --env-file .env -e CONNECTION_STRING="<personal-connection-string>" cvv8cb/roll:latest`
+` docker run -it --rm  -p 8080:8080 --env-file <env-file> cvv8cb/roll:latest`
 
-where `<personal-connection-string>` is the specific string from your MongoDB account.
+where `<env-file>` is replaced with the name of your env file, for example `.env`. See `.env.example` for how this file should look.
 
 ## ✒️ Design Decisions
 
