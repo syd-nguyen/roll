@@ -93,15 +93,17 @@ Making a rideboard and adding drivers and riders is very fast and does not take 
 
 ### 😊 Sample Outputs
 
-There are three types of pages within _roll_: the homepage where users can create a rideboard, an event page where users can view and edit a rideboard, and an event DNE page that shows when a user tries to a view an rideboard that does not exist. There are also modals that popup within the first two of those pages. These are shown below.
+There are three types of pages within _roll_: the homepage where users can create a rideboard, an event page where users can view and edit a rideboard, and an event DNE page that shows when a user tries to a view an rideboard that does not exist. These are shown below.
 
 _Home Page_
 
-ADD TWO IMAGES HERE
+![home](./assets/homepage.png)
+![home2](./assets/homepage2.png)
 
 _Event Page_
 
-ADD THREE IMAGES HERE
+![event](./assets/event.png)
+![home](./assets/event2.png)
 
 _Event DNE Page_
 
