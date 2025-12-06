@@ -10,8 +10,8 @@ import os
 app = Flask(__name__, template_folder="templates")
 
 client = MongoClient(os.environ['CONNECTION_STRING'])
-db = client["main"]
-events = db["events"]
+db = client[os.environ['DATABASE']]
+events = db[os.environ['CONTAINER']]
 
 @app.get("/")
 def home():
