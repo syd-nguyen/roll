@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 import os
 
-app = Flask(__name__, template_folder="templates")
+app = Flask(__name__)
 
 client = MongoClient(os.environ['CONNECTION_STRING'])
 db = client["main"]
