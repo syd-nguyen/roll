@@ -121,6 +121,8 @@ As mentioned, inputs are validated using Pydantic. Below is an image of what hap
 
 ![error](./assets/error.png)
 
+There is also a `test.py` file that can be run in the terminal. It checks the health endpoint to make sure that it returns `{'status': 'ok'}`.
+
 ## 🔮 What's Next
 
 ### 🎨 Planned / Potential Improvements
