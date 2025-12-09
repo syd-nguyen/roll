@@ -1,4 +1,4 @@
-const rootUrl = "http://localhost:8080";
+const rootUrl = "https://roll-qx5j.onrender.com/";
 
 const newBoardForm = document.getElementById("newBoardForm");
 const eventNameField = document.getElementById("eventNameField");
