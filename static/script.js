@@ -1,4 +1,5 @@
-const rootUrl = window.location.href;
+var rootUrl = window.location.href;
+rootUrl = rootUrl.substring(0, rootUrl.length - 1) // minus the ending slash
 
 const newBoardForm = document.getElementById("newBoardForm");
 const eventNameField = document.getElementById("eventNameField");

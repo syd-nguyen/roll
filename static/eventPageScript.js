@@ -1,5 +1,5 @@
 var rootUrl = window.location.href;
-rootUrl = rootUrl.substring(0, rootUrl.length - 6);
+rootUrl = rootUrl.substring(0, rootUrl.length - 7); // 7 instead of 6 to remove the slash too
 var currEventId = window.location.href;
 currEventId = currEventId.substring(currEventId.length - 6, currEventId.length);
 

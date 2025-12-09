@@ -68,13 +68,27 @@ def getEventPage(eventId):
     event = events.find_one({'eventId' : eventId})
     # render it
     if (event is not None):
-        eventDatetime = event['eventDatetime'] # this is in the format yyyy-mm-dd hh:mm:ss; we change it to be in the forms mm.dd.yyyy and hh:mm am/pm
+
+        eventDatetime = event['eventDatetime'] # this is in the format yyyy-mm-dd hh:mm:ss; we change it to be in the forms mm.dd.yyyy and hh:mm am/pm or hh am/pm if it's on the hour (eg. 12 pm)
         eventDate = str(eventDatetime.month) + '.' + str(eventDatetime.day) + '.' + str(eventDatetime.year)
-        if (eventDatetime.hour > 12):
-            eventTime = str(eventDatetime.hour - 12) + ":" + str(eventDatetime.minute) + " pm"
+        eventMin = eventDatetime.minute
+
+        if (eventMin > 0 and eventMin < 10):
+            eventMin = ':0' + str(eventMin)
+        elif (eventMin == 0):
+            eventMin = ''
         else:
-            eventTime = str(eventDatetime.hour) + ":" + str(eventDatetime.minute) + " am"
+            eventMin = ':' + str(eventMin)
+        
+        if (eventDatetime.hour > 12):
+            eventTime = str(eventDatetime.hour - 12) + eventMin + " pm"
+        elif (eventDatetime.hour == 12):
+            eventTime = '12' + eventMin + 'pm'
+        else:
+            eventTime = str(eventDatetime.hour) + eventMin + " am"
+
         return render_template('event.html', eventName = event['eventName'], eventDesc = event['eventDesc'], eventLocation = event['eventLocation'], eventDate = eventDate, eventTime = eventTime)
+    
     return render_template('eventDNE.html', eventId = eventId)
     
 @app.post('/api/send-car-to-mongo/<eventId>')
