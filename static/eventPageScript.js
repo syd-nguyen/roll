@@ -1,4 +1,5 @@
-const rootUrl = "http://localhost:8080";
+var rootUrl = window.location.href;
+rootUrl = rootUrl.substring(0, rootUrl.length - 6);
 var currEventId = window.location.href;
 currEventId = currEventId.substring(currEventId.length - 6, currEventId.length);
 

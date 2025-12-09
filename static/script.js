@@ -1,4 +1,4 @@
-const rootUrl = "http://localhost:8080";
+const rootUrl = window.location.href;
 
 const newBoardForm = document.getElementById("newBoardForm");
 const eventNameField = document.getElementById("eventNameField");
