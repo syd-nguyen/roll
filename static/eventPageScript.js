@@ -30,6 +30,7 @@ addCarForm.addEventListener("submit", async (e) => {
         const res = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            mode: "no-cors",
             body: JSON.stringify({ driverName: driverName, numberSeats: numberSeats, takenSeats: 0 })
         });
 
