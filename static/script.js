@@ -40,7 +40,7 @@ newBoardForm.addEventListener("submit", async (e) => {
         const res = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            mode: no-cors,
+            mode: "no-cors",
             body: JSON.stringify({"eventName": eventName, "eventDesc": eventDesc, "eventLocation": eventLocation, "eventDatetime": eventDatetime})
         });
 
