@@ -1,4 +1,4 @@
-const rootUrl = "https://roll-qx5j.onrender.com/";
+const rootUrl = "https://roll-qx5j.onrender.com";
 var currEventId = window.location.href;
 currEventId = currEventId.substring(currEventId.length - 6, currEventId.length);
 
